@@ -7,6 +7,8 @@ Example:
     $ python app.py
 """
 import sys
+
+from numpy import empty
 import fire
 import questionary
 from pathlib import Path
@@ -99,6 +101,9 @@ def find_qualifying_loans(bank_data, credit_score, debt, income, loan, home_valu
 
     print(f"Found {len(bank_data_filtered)} qualifying loans")
 
+    if len(bank_data_filtered) is 0:
+        sys.exit("Sorry, there are no qualifying loans!")
+
     return bank_data_filtered
 
 
@@ -136,7 +141,7 @@ def run():
     qualifying_loans = find_qualifying_loans(
         bank_data, credit_score, debt, income, loan_amount, home_value
     )
-
+    
     # Save qualifying loans
     save_qualifying_loans(qualifying_loans)
 
